@@ -14,9 +14,20 @@ const getWatchlist = (watchlistIds) => {
 // to test, find all users
 // to test, find one user, remove password on query
 module.exports = {
-  users: User.find().then((users) => {
-    return users;
-  }),
+  users: User.find()
+    .then((users) => {
+      return users.map((user) => {
+        return {
+          ...user._doc,
+          password: null,
+          watchlist: getWatchlist.bind(this, user._doc.watchlist)
+        };
+      });
+    })
+    .then((users) => {
+      console.log(users);
+      return users;
+    }),
   user: (args) =>
     User.findOne({ id: args.userId }).then((user) => {
       return {
