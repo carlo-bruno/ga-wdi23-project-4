@@ -10,12 +10,22 @@ const userSchema = new Schema({
     type: String,
     required: true
   },
-  watchList: [
+  watchlist: [
     {
       type: Schema.Types.ObjectId,
       ref: 'Artist'
     }
   ]
 });
+
+// userSchema.set('toObject', {
+//   transform: function(doc, ret, options) {
+//     let returnJson = {
+//       _id: ret._id,
+//       email: ret.email
+//     };
+//     return returnJson;
+//   }
+// });
 
 module.exports = mongoose.model('User', userSchema);
