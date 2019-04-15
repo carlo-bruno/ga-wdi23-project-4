@@ -26,7 +26,10 @@ module.exports = {
       };
     }),
   watchArtist: (args, req) => {
-    // eventually, use req.userId
+    //! use req.userId when ready to use auth
+    // if (!req.isAuth) {
+    //   throw new Error('Unauthenticated!');
+    // }
     User.findById('5cb4c844787e27dc8f170775').then((user) => {
       let artistToWatch = new Artist({
         artistId: args.artistId,
