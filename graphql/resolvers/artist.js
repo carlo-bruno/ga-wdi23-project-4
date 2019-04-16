@@ -21,14 +21,12 @@ module.exports = {
         return data.data.resultsPage.results.artist;
       })
       .then((artists) => {
-        console.log('before map', artists);
         let arr = artists.map((artist) => {
           return {
             artistId: artist.id,
             artistName: artist.displayName
           };
         });
-        console.log(arr);
         return arr;
       });
   },
@@ -37,14 +35,39 @@ module.exports = {
     // if (!req.isAuth) {
     //   throw new Error('Unauthenticated!');
     // }
-    User.findById('5cb4c844787e27dc8f170775').then((user) => {
-      let artistToWatch = new Artist({
-        artistId: args.artistId,
-        artistName: args.artistName
-      });
-      artistToWatch.save();
-      user.watchlist.push(artistToWatch);
-      user.save();
+    // fix duplicate push on subdoc
+    return User.findById('5cb4c844787e27dc8f170775').then((user) => {
+      return Artist.findOne({ artistId: args.artistId }).then(
+        (found) => {
+          let artistToWatch;
+          if (found) {
+            artistToWatch = found;
+          } else {
+            artistToWatch = new Artist({
+              artistId: args.artistId,
+              artistName: args.artistName
+            });
+          }
+          artistToWatch.save();
+          if (user.watchlist.includes(artistToWatch.id)) {
+            console.log('already Watching');
+          }
+          user.watchlist.push(artistToWatch);
+          user.save();
+          return artistToWatch;
+        }
+      );
     });
+  },
+  unwatchArtist: (args, req) => {
+    // again, use req.userId
+    User.findById('5cb4c844787e27dc8f170775')
+      .populate('watchlist')
+      .exec((err, user) => {
+        console.log('before', user);
+        user.watchlist.pull(args.id);
+        console.log('after', user);
+        user.save();
+      });
   }
 };

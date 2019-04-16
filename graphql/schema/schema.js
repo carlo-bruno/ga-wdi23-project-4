@@ -4,9 +4,9 @@ const { buildSchema } = require('graphql');
 
 module.exports = buildSchema(`
   type Artist {
+    _id: ID
     artistId: Int
     artistName: String
-    billing: String
   }
 
   type User {
@@ -37,6 +37,7 @@ module.exports = buildSchema(`
   type RootMutation {
     createUser(userInput: UserInput): User
     watchArtist(artistId: Int, artistName: String): Artist
+    unwatchArtist(id: ID): Artist
   }
 
   schema {

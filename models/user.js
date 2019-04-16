@@ -18,14 +18,15 @@ const userSchema = new Schema({
   ]
 });
 
-// userSchema.set('toObject', {
-//   transform: function(doc, ret, options) {
-//     let returnJson = {
-//       _id: ret._id,
-//       email: ret.email
-//     };
-//     return returnJson;
-//   }
-// });
+userSchema.set('toObject', {
+  transform: function(doc, ret, options) {
+    let returnJson = {
+      _id: ret._id,
+      email: ret.email,
+      watchlist: ret.watchlist
+    };
+    return returnJson;
+  }
+});
 
 module.exports = mongoose.model('User', userSchema);
