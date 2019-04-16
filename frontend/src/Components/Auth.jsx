@@ -97,29 +97,33 @@ class Auth extends Component {
         </h3>
         <form className='auth-form' onSubmit={this.handleSubmit}>
           <div className='form-control'>
-            <label htmlFor='emai'>Email</label>
             <input
               type='email'
               id='email'
               ref={this.emailEl}
+              placeholder='Email'
               required
             />
           </div>
           <div className='form-control'>
-            <label htmlFor='password'>Password</label>
             <input
               type='password'
               id='password'
               ref={this.passwordEl}
+              placeholder='Password'
               required
             />
           </div>
           <div className='form-actions'>
-            <button type='submit'>
-              {this.state.isLogin ? 'Log in!' : 'Sign Up!'}
+            <button
+              type='button'
+              className='switch-btn'
+              onClick={this.switchMode}>
+              Switch to{' '}
+              <em>{this.state.isLogin ? 'Sign up' : 'Log in'}</em>
             </button>
-            <button type='button' onClick={this.switchMode}>
-              Switch to {this.state.isLogin ? 'Sign up' : 'Log in'}
+            <button type='submit' className='submit-btn'>
+              {this.state.isLogin ? 'Log in!' : 'Sign Up!'}
             </button>
           </div>
         </form>

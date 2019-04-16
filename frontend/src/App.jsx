@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
-// import { Route, Redirect, Switch } from 'react-router-dom';
+import { Route, Redirect, Switch } from 'react-router-dom';
 import './App.css';
-import Auth from './Pages/Auth';
+
 import AuthContext from './context/auth-context';
+
 import Header from './Components/Header';
 import MenuBar from './Components/MenuBar';
+import LandingPage from './Pages/LandingPage';
 
 class App extends Component {
   constructor(props) {
@@ -35,8 +37,11 @@ class App extends Component {
           <Header />
 
           <main className='Content'>
-            {/* Routes here */}
-            <Auth />
+            <Switch>
+              <Route path='/' component={LandingPage} />
+
+              {!this.state.token && <Redirect to='/' exact />}
+            </Switch>
           </main>
 
           <MenuBar />

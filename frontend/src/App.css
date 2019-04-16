@@ -1,10 +1,11 @@
 @import url('./styles/Components.css');
-/* @import url('./styles/Pages.css'); */
+@import url('./styles/Pages.css');
 
 /*
 COLORS
 #131fa4
 #913d88
+#481ee1;
 */
 
 * {
@@ -20,7 +21,7 @@ COLORS
   display: flex;
   flex-direction: column;
 
-  background-color: lightgray;
+  background-color: #dddddd;
 }
 
 .Content {
