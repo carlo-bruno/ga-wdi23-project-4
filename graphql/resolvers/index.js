@@ -1,9 +1,11 @@
 const authResolver = require('./auth');
 const userResolver = require('./user');
+const artistResolver = require('./artist');
 
 const RootResolver = {
   ...authResolver,
-  ...userResolver
+  ...userResolver,
+  ...artistResolver
 };
 
 module.exports = RootResolver;
