@@ -36,7 +36,7 @@ module.exports = {
     //   throw new Error('Unauthenticated!');
     // }
     // fix duplicate push on subdoc
-    return User.findById('5cb4c844787e27dc8f170775').then((user) => {
+    return User.findById('5cb60661dc54c006e1e8234a').then((user) => {
       return Artist.findOne({ artistId: args.artistId }).then(
         (found) => {
           let artistToWatch;
@@ -61,7 +61,7 @@ module.exports = {
   },
   unwatchArtist: (args, req) => {
     // again, use req.userId
-    User.findById('5cb4c844787e27dc8f170775')
+    User.findById('5cb60661dc54c006e1e8234a')
       .populate('watchlist')
       .exec((err, user) => {
         console.log('before', user);
