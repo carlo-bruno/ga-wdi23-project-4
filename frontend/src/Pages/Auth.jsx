@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import AuthContext from '../context/auth-context';
 // import axios from 'axios';
 
 class Auth extends Component {
@@ -11,6 +12,8 @@ class Auth extends Component {
       isLogin: true
     };
   }
+
+  static contextType = AuthContext;
 
   switchMode = (e) => {
     e.preventDefault();
@@ -71,7 +74,13 @@ class Auth extends Component {
         return res.json();
       })
       .then((resData) => {
-        console.log(resData);
+        if (resData.data.login.token) {
+          this.context.login(
+            resData.data.login.token,
+            resData.data.login.userId,
+            resData.data.login.tokenExpiration
+          );
+        }
       })
       .catch((err) => {
         console.log(err);
