@@ -4,9 +4,10 @@ import Auth from '../Components/Auth';
 const Home = () => {
   return (
     <div className='LandingPage'>
-      <div className='brand-statement'>
-        <h2>Landing Page</h2>
-      </div>
+      <section className='brand-statement'>
+        <h2 className='brand-font'>HighNote</h2>
+        <h3>More Music &bull; More Memories</h3>
+      </section>
       <Auth />
     </div>
   );

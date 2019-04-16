@@ -1,1 +1,38 @@
+/*
+COLORS
+#131fa4
+#913d88
+#481ee1
+*/
+
 /* Landing Page ----------------------------------------- */
+.LandingPage .brand-statement {
+  height: 45vh;
+  background-image: url('../images/david-calderon-973699-unsplash.jpg');
+  background-color: #8f3c87a6;
+  background-repeat: no-repeat;
+  background-position: top;
+  background-size: 130vw;
+  background-blend-mode: multiply;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 6vh;
+}
+
+.LandingPage .brand-statement h2 {
+  margin: 0;
+  font-size: 6rem;
+  font-weight: 300;
+  color: #ffffff;
+  mix-blend-mode: hard-light;
+}
+
+.LandingPage .brand-statement h3 {
+  color: #ffffff;
+  font-size: 1.5rem;
+  font-weight: 300;
+  margin: 15px 0 0;
+}
