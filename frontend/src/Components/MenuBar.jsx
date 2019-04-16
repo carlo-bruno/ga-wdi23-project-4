@@ -1,0 +1,31 @@
+// @ts-nocheck
+import React from 'react';
+import { NavLink } from 'react-router-dom';
+
+import { ReactComponent as Calendar } from '../images/calendar-regular.svg';
+import { ReactComponent as Star } from '../images/star-regular.svg';
+import { ReactComponent as User } from '../images/user-alt-solid.svg';
+
+import AuthContext from '../context/auth-context';
+
+const MenuBar = () => (
+  <AuthContext.Consumer>
+    {(context) => {
+      return (
+        <nav className='MenuBar'>
+          <NavLink to='/events'>
+            <Calendar />
+          </NavLink>
+          <NavLink to='/artists'>
+            <Star />
+          </NavLink>
+          <NavLink to='/profile'>
+            <User />
+          </NavLink>
+        </nav>
+      );
+    }}
+  </AuthContext.Consumer>
+);
+
+export default MenuBar;

@@ -1,0 +1,48 @@
+/*
+COLORS
+#131fa4
+#913d88
+
+
+*/
+
+/* Header ----------------------------------------- */
+.Header {
+  height: 10vh;
+  background-image: linear-gradient(155deg, #131fa4, #913d88);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 10px;
+  color: #ffffff;
+}
+
+.Header h1 {
+  padding: 0;
+  margin: 0;
+  font-weight: 300;
+  font-size: 2.8rem;
+}
+
+.Header a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Menu Bar --------------------------------------- */
+.MenuBar {
+  background-image: linear-gradient(155deg, #131fa4, #913d88);
+  height: 8vh;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.MenuBar svg {
+  width: 32px;
+  height: 32px;
+}
+
+.MenuBar svg path {
+  fill: #ffffff;
+}

@@ -60,7 +60,7 @@ class Auth extends Component {
       };
     }
 
-    fetch('http://localhost:3001/graphql', {
+    fetch('/graphql', {
       method: 'POST',
       body: JSON.stringify(requestBody),
       headers: {

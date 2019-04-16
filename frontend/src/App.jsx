@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
+// import { Route, Redirect, Switch } from 'react-router-dom';
 import './App.css';
 import Auth from './Pages/Auth';
 import AuthContext from './context/auth-context';
+import Header from './Components/Header';
+import MenuBar from './Components/MenuBar';
 
 class App extends Component {
   constructor(props) {
@@ -22,7 +25,6 @@ class App extends Component {
   render() {
     return (
       <div className='App'>
-        <h1> HighNote</h1>
         <AuthContext.Provider
           value={{
             token: this.state.token,
@@ -30,7 +32,14 @@ class App extends Component {
             login: this.login,
             logout: this.logout
           }}>
-          <Auth />
+          <Header />
+
+          <main className='Content'>
+            {/* Routes here */}
+            <Auth />
+          </main>
+
+          <MenuBar />
         </AuthContext.Provider>
       </div>
     );
