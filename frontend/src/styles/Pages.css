@@ -38,7 +38,23 @@ COLORS
 }
 
 /* Profile Page ----------------------------------------- */
-.logout-btn {
+.ProfilePage section {
+  background-image: url('../images/what-the-hex.png');
+  background-color: #6f1ee17b;
+  background-blend-mode: multiply;
+  height: 52vh;
+  padding: 4vh 0;
+}
+
+.ProfilePage .profile-img {
+  width: 275px;
+  height: 275px;
+  margin: 0 auto;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.ProfilePage .logout-btn {
   width: 70%;
   font-size: 1rem;
   font-weight: 600;
@@ -48,4 +64,5 @@ COLORS
   color: #ffffff;
   letter-spacing: 1px;
   padding: 12px 0;
+  margin: 5vh 0;
 }

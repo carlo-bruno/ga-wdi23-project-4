@@ -53,10 +53,10 @@ class App extends Component {
               <Route exact path='/' component={LandingPage} />
               <Route path='/events' component={EventsPage} />
               <Route path='/artists' component={ArtistPage} />
-              {this.state.token && (
-                <Route path='/profile' component={ProfilePage} />
-              )}
-              {!this.state.token && <Redirect to='/' exact />}
+              {/* {this.state.token && ( */}
+              <Route path='/profile' component={ProfilePage} />
+              {/* )} */}
+              {/* {!this.state.token && <Redirect to='/' exact />} */}
             </Switch>
           </main>
 

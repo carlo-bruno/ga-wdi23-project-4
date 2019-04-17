@@ -20,9 +20,8 @@ const MenuBar = () => (
             <Star />
           </NavLink>
 
-          <NavLink
-            to='/profile'
-            style={!context.token ? { pointerEvents: 'none' } : {}}>
+          <NavLink to='/profile'>
+            {/*style={!context.token ? { pointerEvents: 'none' } : {}} >*/}
             <User />
           </NavLink>
         </nav>

@@ -7,14 +7,14 @@ class ProfilePage extends Component {
       <AuthContext.Consumer>
         {(context) => (
           <div className='ProfilePage'>
-            <h2>Profile Page</h2>
             <section>
               <div className='profile-img'>
                 <img
-                  src='http://placekitten.com/g/200/200'
+                  src='http://placekitten.com/g/275/275'
                   alt='placeholder'
                 />
               </div>
+              <h3>{context.userId}</h3>
             </section>
             <button className='logout-btn' onClick={context.logout}>
               Logout

@@ -46,6 +46,7 @@ COLORS
 .MenuBar svg path {
   fill: #ffffff;
 }
+/* TODO nav active (maybe a round white border) */
 
 /* Auth Form --------------------------------------- */
 .Auth .auth-form {
