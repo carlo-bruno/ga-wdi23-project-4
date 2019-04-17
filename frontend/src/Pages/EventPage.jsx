@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import EventCard from '../Components/EventCard';
 
 class EventPage extends Component {
   constructor(props) {
@@ -61,8 +62,12 @@ class EventPage extends Component {
   };
 
   render() {
+    let cards = this.state.events.map((event, i) => {
+      return <EventCard key={i} event={event} />;
+    });
+
     return (
-      <div className='EventsPage'>
+      <div className='EventPage'>
         <header>
           <input
             type='text'
@@ -96,11 +101,7 @@ class EventPage extends Component {
             </span>
           </div>
         </div>
-        {/* 
-          events collection
-
-
-        */}
+        <section className='events-collection'>{cards}</section>
       </div>
     );
   }

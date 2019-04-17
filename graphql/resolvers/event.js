@@ -23,7 +23,7 @@ module.exports = {
         return data.data.resultsPage.results.location[0].metroArea.id;
       })
       .then((metroId) => {
-        console.log(metroId);
+        // console.log(metroId);
         return axios
           .get(
             `https://api.songkick.com/api/3.0/metro_areas/${metroId}/calendar.json?apikey=${
@@ -39,15 +39,15 @@ module.exports = {
                 eventId: event.id,
                 eventName: event.displayName,
                 type: event.type,
-                date: event.start.datetime,
+                date: event.start.datetime || event.start.date,
                 venue: event.venue.displayName,
                 lat: event.location.lat,
                 lng: event.location.lng,
-                performance: getArtists.bind(this, event)
+                performance: getArtists.bind(this, event),
               };
             });
             return arr;
           });
       });
-  }
+  },
 };

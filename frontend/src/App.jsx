@@ -17,7 +17,7 @@ class App extends Component {
 
     this.state = {
       token: null,
-      userId: null
+      userId: null,
     };
   }
 
@@ -29,7 +29,7 @@ class App extends Component {
     console.log('trying to log out');
     this.setState({
       token: null,
-      userId: null
+      userId: null,
     });
   };
 
@@ -41,7 +41,7 @@ class App extends Component {
             token: this.state.token,
             userId: this.state.userId,
             login: this.login,
-            logout: this.logout
+            logout: this.logout,
           }}>
           <Header />
 

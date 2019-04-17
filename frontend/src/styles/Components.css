@@ -104,3 +104,60 @@ COLORS
   color: #481ee1;
   padding: 10px 0;
 }
+
+/* Event Card --------------------------------------- */
+.EventCard {
+  border-radius: 5px;
+  background-image: linear-gradient(155deg, #131fa4, #913d88 50%);
+  padding: 3px;
+  margin-bottom: 0.8rem;
+}
+
+.EventCard .card-inner {
+  background: #ffffff;
+  border-radius: 5px;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-evenly;
+  align-items: stretch;
+  padding: 0 10px;
+
+  min-height: 90px;
+}
+
+.EventCard h4,
+.EventCard p {
+  margin: 0;
+}
+
+.EventCard .date-box {
+  width: 15%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: transparent;
+
+  font-weight: 900;
+  font-size: 1.3rem;
+}
+
+.EventCard .info-box {
+  width: 70%;
+  text-align: left;
+  padding: 0.5rem 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.EventCard .info-box p {
+  font-size: 0.9rem;
+  color: #333333;
+}
+
+.EventCard .save-box {
+  width: 10%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

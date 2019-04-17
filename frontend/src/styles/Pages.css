@@ -66,3 +66,17 @@ COLORS
   padding: 12px 0;
   margin: 5vh 0;
 }
+
+/* Event Page ----------------------------------------- */
+.EventPage {
+  height: 82vh;
+  overflow: hidden;
+}
+
+.EventPage .events-collection {
+  background-color: #ffffff;
+  margin-top: 10px;
+  padding: 0 20px;
+  height: 83%;
+  overflow-y: scroll;
+}
