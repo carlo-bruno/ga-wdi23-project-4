@@ -22,9 +22,11 @@ module.exports = {
       })
       .then((artists) => {
         let arr = artists.map((artist) => {
+          console.log(artist);
           return {
             artistId: artist.id,
-            artistName: artist.displayName
+            artistName: artist.displayName,
+            onTourUntil: artist.onTourUntil,
           };
         });
         return arr;
@@ -45,7 +47,7 @@ module.exports = {
           } else {
             artistToWatch = new Artist({
               artistId: args.artistId,
-              artistName: args.artistName
+              artistName: args.artistName,
             });
           }
           artistToWatch.save();
@@ -69,5 +71,5 @@ module.exports = {
         console.log('after', user);
         user.save();
       });
-  }
+  },
 };

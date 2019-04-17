@@ -7,7 +7,7 @@ const getArtists = (event) => {
   const artistsArr = event.performance.map((artist) => {
     return { artistId: artist.id, artistName: artist.displayName };
   });
-  console.log(artistsArr);
+  // console.log(artistsArr);
   return artistsArr;
 };
 
