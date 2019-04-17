@@ -3,6 +3,17 @@ const { buildSchema } = require('graphql');
 //? Artist.billing not sure yet
 
 module.exports = buildSchema(`
+type Event {
+  eventId: Int
+  eventName: String
+  type: String
+  date: String
+  venue: String
+  lat: Float
+  lng: Float
+  performance: [Artist]
+}
+
   type Artist {
     _id: ID
     artistId: Int
@@ -32,6 +43,7 @@ module.exports = buildSchema(`
     user(id: ID): User
     login(email: String!, password: String!): AuthData
     searchArtist(search: String): [Artist]
+    metroEvents(metro: String): [Event]
   }
 
   type RootMutation {
