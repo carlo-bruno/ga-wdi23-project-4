@@ -7,6 +7,9 @@ import AuthContext from './context/auth-context';
 import Header from './Components/Header';
 import MenuBar from './Components/MenuBar';
 import LandingPage from './Pages/LandingPage';
+import EventsPage from './Pages/EventPage';
+import ArtistPage from './Pages/ArtistPage';
+import ProfilePage from './Pages/ProfilePage';
 
 class App extends Component {
   constructor(props) {
@@ -22,7 +25,13 @@ class App extends Component {
     this.setState({ token, userId });
   };
 
-  logout = () => {};
+  logout = () => {
+    console.log('trying to log out');
+    this.setState({
+      token: null,
+      userId: null
+    });
+  };
 
   render() {
     return (
@@ -38,8 +47,15 @@ class App extends Component {
 
           <main className='Content'>
             <Switch>
-              <Route path='/' component={LandingPage} />
-
+              {this.state.token && (
+                <Redirect from='/' to='/events' exact />
+              )}
+              <Route exact path='/' component={LandingPage} />
+              <Route path='/events' component={EventsPage} />
+              <Route path='/artists' component={ArtistPage} />
+              {this.state.token && (
+                <Route path='/profile' component={ProfilePage} />
+              )}
               {!this.state.token && <Redirect to='/' exact />}
             </Switch>
           </main>

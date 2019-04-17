@@ -36,3 +36,16 @@ COLORS
   font-weight: 300;
   margin: 15px 0 0;
 }
+
+/* Profile Page ----------------------------------------- */
+.logout-btn {
+  width: 70%;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 5px;
+  border: 0;
+  background-image: linear-gradient(155deg, #131fa4, #913d88);
+  color: #ffffff;
+  letter-spacing: 1px;
+  padding: 12px 0;
+}
