@@ -54,6 +54,10 @@ COLORS
   padding: 10px;
 }
 
+.Auth h3 {
+  margin: 10px 0;
+}
+
 .Auth .form-control input {
   font-size: 1rem;
   width: 85%;
@@ -67,28 +71,35 @@ COLORS
 
 .Auth .form-actions {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  /* justify-content: space-between; */
   width: 80%;
   margin: 0 auto;
 }
+.Auth .form-actions small {
+  margin: 8px;
+}
 
 .Auth .form-actions button {
-  width: 48%;
+  width: 90%;
   font-size: 1rem;
   font-weight: 600;
-
-  border: 1px solid #481ee1;
-  border-radius: 3px;
-  padding: 10px 0;
+  border-radius: 5px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .Auth .submit-btn {
-  background-color: #481ee1;
+  border: 0;
+  background-image: linear-gradient(155deg, #131fa4, #913d88);
   color: #ffffff;
   letter-spacing: 1px;
+  padding: 12px 0;
 }
 
 .Auth .switch-btn {
-  border: 2px solid #481ee1;
+  margin-top: 15px;
+  border: 2px solid #131fa4;
   color: #481ee1;
+  padding: 10px 0;
 }

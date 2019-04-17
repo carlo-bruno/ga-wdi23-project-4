@@ -115,15 +115,17 @@ class Auth extends Component {
             />
           </div>
           <div className='form-actions'>
+            <button type='submit' className='submit-btn'>
+              {this.state.isLogin ? 'Log in!' : 'Sign Up!'}
+            </button>
             <button
               type='button'
               className='switch-btn'
               onClick={this.switchMode}>
-              Switch to{' '}
+              {this.state.isLogin
+                ? "Don't have an account?"
+                : 'Already a member?'}{' '}
               <em>{this.state.isLogin ? 'Sign up' : 'Log in'}</em>
-            </button>
-            <button type='submit' className='submit-btn'>
-              {this.state.isLogin ? 'Log in!' : 'Sign Up!'}
             </button>
           </div>
         </form>
