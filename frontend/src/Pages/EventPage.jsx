@@ -101,6 +101,7 @@ class EventPage extends Component {
             </span>
           </div>
         </div>
+
         <section className='events-collection'>{cards}</section>
       </div>
     );

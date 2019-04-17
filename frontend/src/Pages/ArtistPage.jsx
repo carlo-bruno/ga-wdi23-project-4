@@ -11,6 +11,10 @@ class ArtistPage extends Component {
     };
   }
 
+  changeFilter = (filter) => {
+    this.setState({ filter });
+  };
+
   handleQueryArtist = () => {
     const search = this.queryArtist.current.value;
 
@@ -64,11 +68,30 @@ class ArtistPage extends Component {
           />
           <button onClick={this.handleQueryArtist}>Search</button>
         </header>
-        {/*
-        // 
-        
-        // 
-        */}
+
+        <div className='artists-filters'>
+          <div
+            className={`filter ${
+              this.state.filter === 'all' ? 'active' : ''
+            }`}
+            onClick={() => this.changeFilter('all')}>
+            ALL{' '}
+            <span className='artists-count'>
+              {this.state.artists.length}
+            </span>{' '}
+          </div>
+          <div
+            className={`filter ${
+              this.state.filter === 'saved' ? 'active' : ''
+            }`}
+            onClick={() => this.changeFilter('saved')}>
+            SAVED{' '}
+            <span className='artists-count'>
+              {/* {this.state.saved.length} */}
+            </span>
+          </div>
+        </div>
+
         <section className='artists-collection'>{cards}</section>
       </div>
     );
