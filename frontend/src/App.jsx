@@ -8,8 +8,10 @@ import Header from './Components/Header';
 import MenuBar from './Components/MenuBar';
 import LandingPage from './Pages/LandingPage';
 import EventsPage from './Pages/EventPage';
+import EventShow from './Pages/EventShow';
 import ArtistPage from './Pages/ArtistPage';
 import ProfilePage from './Pages/ProfilePage';
+import ArtistShow from './Pages/ArtistShow';
 
 class App extends Component {
   constructor(props) {
@@ -51,8 +53,16 @@ class App extends Component {
                 <Redirect from='/' to='/events' exact />
               )}
               <Route exact path='/' component={LandingPage} />
-              <Route path='/events' component={EventsPage} />
-              <Route path='/artists' component={ArtistPage} />
+              <Route exact path='/events' component={EventsPage} />
+              <Route
+                path={'/events/:eventId'}
+                render={(props) => <EventShow {...props} />}
+              />
+              <Route exact path='/artists' component={ArtistPage} />
+              <Route
+                path='/artists/:artistId'
+                render={(props) => <ArtistShow {...props} />}
+              />
               {/* {this.state.token && ( */}
               <Route path='/profile' component={ProfilePage} />
               {/* )} */}

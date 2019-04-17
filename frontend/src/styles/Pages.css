@@ -80,3 +80,17 @@ COLORS
   height: 83%;
   overflow-y: scroll;
 }
+
+/* Artist Page ----------------------------------------- */
+.ArtistPage {
+  height: 82vh;
+  overflow: hidden;
+}
+
+.ArtistPage .artists-collection {
+  background-color: #ffffff;
+  margin-top: 10px;
+  padding: 0 20px;
+  height: 83%;
+  overflow-y: scroll;
+}

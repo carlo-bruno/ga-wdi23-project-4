@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ArtistCard from '../Components/ArtistCard';
 
 class ArtistPage extends Component {
   constructor(props) {
@@ -12,7 +13,6 @@ class ArtistPage extends Component {
 
   handleQueryArtist = () => {
     const search = this.queryArtist.current.value;
-    console.log(search);
 
     let requestBody = {
       query: `
@@ -44,12 +44,14 @@ class ArtistPage extends Component {
         return res.json();
       })
       .then((resData) => {
-        console.log(resData.data);
         this.setState({ artists: resData.data.searchArtist });
       });
   };
 
   render() {
+    let cards = this.state.artists.map((artist, i) => {
+      return <ArtistCard key={i} artist={artist} />;
+    });
     return (
       <div className='ArtistPage'>
         <header>
@@ -67,6 +69,7 @@ class ArtistPage extends Component {
         
         // 
         */}
+        <section className='artists-collection'>{cards}</section>
       </div>
     );
   }
