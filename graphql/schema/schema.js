@@ -42,7 +42,6 @@ type Event {
   }
 
   type RootQuery {
-    users: [User]
     user(id: ID): User
     login(email: String!, password: String!): AuthData
     searchArtist(search: String): [Artist]
