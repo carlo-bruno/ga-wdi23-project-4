@@ -137,13 +137,14 @@ class App extends Component {
       });
   };
 
-  watchArtist = (artistId) => {
+  watchArtist = (artistId, artistName) => {
     if (!this.state.token) return;
 
     let requestBody = {
       query: `
-      mutation WatchArtist($artistId: Int){
-        watchArtist(artistId: $artistId) {
+      mutation WatchArtist($artistId: Int, $artistName: String){
+        watchArtist(artistId: $artistId, artistName: $artistName) {
+          _id
           artistId
           artistName
           onTourUntil
@@ -162,6 +163,7 @@ class App extends Component {
       `,
       variables: {
         search: parseInt(artistId),
+        artistName: artistName,
       },
     };
 

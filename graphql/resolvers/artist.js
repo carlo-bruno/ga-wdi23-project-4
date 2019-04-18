@@ -78,32 +78,50 @@ module.exports = {
     if (!req.isAuth) {
       throw new Error('Unauthenticated!');
     }
-    // get artist data from
-    // console.log(args);
-    // console.log(req.body.variables.search);
-
+    // get artist data from db
     let saveId = req.body.variables.search;
-    // fix duplicate push on subdoc
-    return User.findById(req.userId).then((user) => {
-      return Artist.findOne({ artistId: saveId }).then((found) => {
-        let artistToWatch;
-        if (found) {
-          artistToWatch = found;
-        } else {
-          artistToWatch = new Artist({
-            artistId: args.artistId,
-            artistName: args.artistName,
-          });
-        }
-        artistToWatch.save();
-        if (user.watchlist.includes(artistToWatch.id)) {
-          console.log('already Watching');
-        }
-        user.watchlist.push(artistToWatch);
-        user.save();
-        return artistToWatch;
+    return axios
+      .get(
+        `https://api.songkick.com/api/3.0/search/artists.json?apikey=${
+          process.env.SONGKICK_API
+        }&query=${req.body.variables.artistName}`
+      )
+      .then((data) => {
+        return data.data.resultsPage.results.artist;
+      })
+      .then((artists) => {
+        let saveArtist = artists.find((artist) => {
+          return artist.id === saveId;
+        });
+        return saveArtist;
+      })
+      .then((saveArtist) => {
+        return User.findById(req.userId).then((user) => {
+          return Artist.findOne({ artistId: saveId }).then(
+            (found) => {
+              let artistToWatch;
+              if (found) {
+                artistToWatch = found;
+              } else {
+                artistToWatch = new Artist({
+                  artistId: saveArtist.id,
+                  artistName: saveArtist.displayName,
+                  onTourUntil: saveArtist.onTourUntil,
+                  events: getEvents.bind(this, saveArtist),
+                });
+              }
+              artistToWatch.save();
+              if (user.watchlist.includes(artistToWatch.id)) {
+                console.log('already Watching');
+              }
+              user.watchlist.push(artistToWatch);
+              user.save();
+              console.log(artistToWatch);
+              return artistToWatch;
+            }
+          );
+        });
       });
-    });
   },
   unwatchArtist: (args, req) => {
     if (!req.isAuth) {
