@@ -17,7 +17,6 @@ const getArtists = (event) => {
 };
 
 const getEvents = (artist) => {
-  console.log('heeey', artist);
   return axios
     .get(
       `https://api.songkick.com/api/3.0/artists/${

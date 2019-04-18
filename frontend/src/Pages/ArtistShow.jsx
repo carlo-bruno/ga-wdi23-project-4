@@ -6,12 +6,18 @@ import { Redirect } from 'react-router-dom';
 const ArtistShow = (props) => {
   let content = <Redirect to='/artists' />;
   let showArtist = null;
-  if (props.artists.length) {
-    showArtist = props.artists.find((artist) => {
-      return (
-        artist.artistId === parseInt(props.match.params.artistId)
-      );
-    });
+  if (props.artists.length || props.saved.length) {
+    showArtist =
+      props.artists.find((artist) => {
+        return (
+          artist.artistId === parseInt(props.match.params.artistId)
+        );
+      }) ||
+      props.saved.find((artist) => {
+        return (
+          artist.artistId === parseInt(props.match.params.artistId)
+        );
+      });
 
     let { artistName, onTourUntil, events } = showArtist;
 
@@ -48,7 +54,6 @@ const ArtistShow = (props) => {
         </div>
       </section>
     );
-    console.log(showArtist);
   }
 
   return (

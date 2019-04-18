@@ -15,7 +15,11 @@ class ArtistPage extends Component {
   };
 
   render() {
-    let cards = this.props.artists.map((artist, i) => {
+    let display =
+      this.state.filter === 'all'
+        ? this.props.artists
+        : this.props.saved;
+    let cards = display.map((artist, i) => {
       return <ArtistCard key={i} artist={artist} />;
     });
     return (
@@ -56,7 +60,7 @@ class ArtistPage extends Component {
             onClick={() => this.changeFilter('saved')}>
             SAVED{' '}
             <span className='artists-count'>
-              {/* {this.state.saved.length} */}
+              {this.props.saved.length}
             </span>
           </div>
         </div>

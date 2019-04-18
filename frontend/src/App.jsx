@@ -22,11 +22,14 @@ class App extends Component {
       userId: null,
       events: [],
       artists: [],
+      savedArtist: [],
     };
   }
 
   login = (token, userId, tokenExpiration) => {
-    this.setState({ token, userId });
+    this.setState({ token, userId }, () => {
+      this.getSavedArtist();
+    });
   };
 
   logout = () => {
@@ -38,9 +41,8 @@ class App extends Component {
   };
 
   handleQueryMetro = (query) => {
-    if (!query) {
-      return;
-    }
+    if (!query) return;
+
     let requestBody = {
       query: `
         query MetroEvents($metro: String) {
@@ -88,9 +90,8 @@ class App extends Component {
   };
 
   handleQueryArtist = (query) => {
-    if (!query) {
-      return;
-    }
+    if (!query) return;
+
     let requestBody = {
       query: `
         query SearchArtist($search: String) {
@@ -183,8 +184,59 @@ class App extends Component {
         return res.json();
       })
       .then((resData) => {
-        console.log(resData);
-        return;
+        this.getSavedArtist();
+      });
+  };
+
+  getSavedArtist = () => {
+    if (!this.state.userId) return;
+    let userId = this.state.userId;
+
+    let requestBody = {
+      query: `
+        query User($id: ID) {
+          user(id: $id){
+            watchlist {
+              _id
+              artistId
+              artistName
+              onTourUntil
+              events {
+                eventId
+                eventName
+                type
+                date
+                venue
+                metroArea
+                lat
+                lng
+              }
+            }
+          }
+        }
+      `,
+      variables: {
+        id: userId,
+      },
+    };
+
+    fetch('/graphql', {
+      method: 'POST',
+      body: JSON.stringify(requestBody),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((res) => {
+        if (res.status !== 200 && res.status !== 201) {
+          throw new Error('Failed!');
+        }
+        return res.json();
+      })
+      .then((resData) => {
+        this.setState({
+          savedArtist: resData.data.user.watchlist,
+        });
       });
   };
 
@@ -231,6 +283,7 @@ class App extends Component {
                 render={() => (
                   <ArtistPage
                     artists={this.state.artists}
+                    saved={this.state.savedArtist}
                     handleQueryArtist={this.handleQueryArtist}
                   />
                 )}
@@ -240,6 +293,7 @@ class App extends Component {
                 render={(props) => (
                   <ArtistShow
                     artists={this.state.artists}
+                    saved={this.state.savedArtist}
                     watchArtist={this.watchArtist}
                     {...props}
                   />
