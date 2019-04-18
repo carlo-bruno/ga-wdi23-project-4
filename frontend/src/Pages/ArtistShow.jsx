@@ -54,6 +54,12 @@ const ArtistShow = (props) => {
     <div className='ArtistShow'>
       <header>
         <span onClick={() => props.history.goBack()}>&larr;</span>
+        <button
+          onClick={() =>
+            props.watchArtist(props.match.params.artistId)
+          }>
+          SAVE
+        </button>
       </header>
       {content}
     </div>

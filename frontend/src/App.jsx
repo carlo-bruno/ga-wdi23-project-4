@@ -137,6 +137,55 @@ class App extends Component {
       });
   };
 
+  watchArtist = (artistId) => {
+    if (!this.state.token) return;
+
+    let requestBody = {
+      query: `
+      mutation WatchArtist($artistId: Int){
+        watchArtist(artistId: $artistId) {
+          artistId
+          artistName
+          onTourUntil
+          events {
+            eventId
+            eventName
+            type
+            date
+            venue
+            metroArea
+            lat
+            lng
+          }
+        }
+      }
+      `,
+      variables: {
+        search: parseInt(artistId),
+      },
+    };
+
+    let token = this.state.token;
+    fetch('/graphql', {
+      method: 'POST',
+      body: JSON.stringify(requestBody),
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + token,
+      },
+    })
+      .then((res) => {
+        // if (res.status !== 200 && res.status !== 201) {
+        //   throw new Error('Failed!');
+        // }
+        return res.json();
+      })
+      .then((resData) => {
+        console.log(resData);
+        return;
+      });
+  };
+
   //!-------------------------------------------------------------------!//
   render() {
     return (
@@ -189,6 +238,7 @@ class App extends Component {
                 render={(props) => (
                   <ArtistShow
                     artists={this.state.artists}
+                    watchArtist={this.watchArtist}
                     {...props}
                   />
                 )}

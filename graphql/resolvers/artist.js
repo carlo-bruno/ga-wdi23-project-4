@@ -75,36 +75,41 @@ module.exports = {
   },
   watchArtist: (args, req) => {
     //! use req.userId when ready to use auth
-    // if (!req.isAuth) {
-    //   throw new Error('Unauthenticated!');
-    // }
+    if (!req.isAuth) {
+      throw new Error('Unauthenticated!');
+    }
+    // get artist data from
+    // console.log(args);
+    // console.log(req.body.variables.search);
+
+    let saveId = req.body.variables.search;
     // fix duplicate push on subdoc
-    return User.findById('5cb60661dc54c006e1e8234a').then((user) => {
-      return Artist.findOne({ artistId: args.artistId }).then(
-        (found) => {
-          let artistToWatch;
-          if (found) {
-            artistToWatch = found;
-          } else {
-            artistToWatch = new Artist({
-              artistId: args.artistId,
-              artistName: args.artistName,
-            });
-          }
-          artistToWatch.save();
-          if (user.watchlist.includes(artistToWatch.id)) {
-            console.log('already Watching');
-          }
-          user.watchlist.push(artistToWatch);
-          user.save();
-          return artistToWatch;
+    return User.findById(req.userId).then((user) => {
+      return Artist.findOne({ artistId: saveId }).then((found) => {
+        let artistToWatch;
+        if (found) {
+          artistToWatch = found;
+        } else {
+          artistToWatch = new Artist({
+            artistId: args.artistId,
+            artistName: args.artistName,
+          });
         }
-      );
+        artistToWatch.save();
+        if (user.watchlist.includes(artistToWatch.id)) {
+          console.log('already Watching');
+        }
+        user.watchlist.push(artistToWatch);
+        user.save();
+        return artistToWatch;
+      });
     });
   },
   unwatchArtist: (args, req) => {
-    // again, use req.userId
-    User.findById('5cb60661dc54c006e1e8234a')
+    if (!req.isAuth) {
+      throw new Error('Unauthenticated!');
+    }
+    User.findById(req.userId)
       .populate('watchlist')
       .exec((err, user) => {
         console.log('before', user);

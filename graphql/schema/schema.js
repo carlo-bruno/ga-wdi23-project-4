@@ -51,7 +51,7 @@ type Event {
 
   type RootMutation {
     createUser(userInput: UserInput): User
-    watchArtist(artistId: Int, artistName: String): Artist
+    watchArtist(artistId: Int): Artist
     unwatchArtist(id: ID): Artist
   }
 
