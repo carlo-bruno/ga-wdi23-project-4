@@ -94,6 +94,7 @@ COLORS
   border: 0;
   border-radius: 5px 0 0 5px;
 }
+
 .EventPage header button,
 .ArtistPage header button {
   height: 32px;
@@ -156,8 +157,51 @@ COLORS
   overflow-y: scroll;
 }
 
+/* Event Show && Artist Show ----------------------------------------- */
+.EventShow,
+.ArtistShow {
+  position: relative;
+  padding: 12px 0;
+}
+.EventShow header,
+.ArtistShow header {
+  position: absolute;
+  top: 2%;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 15px;
+}
+
+.EventShow header svg,
+.ArtistShow header svg {
+  width: 30px;
+  height: 30px;
+}
+
+.EventShow .back-btn svg > path,
+.ArtistShow .back-btn svg > path {
+  fill: #5f3193;
+}
+
+.EventShow .title-box,
+.ArtistShow .title-box {
+  padding: 0 60px;
+  margin-bottom: 10px;
+}
+
+.EventShow h2,
+.ArtistShow h2,
+.ArtistShow h3,
+.ArtistShow h4,
+.EventShow p {
+  margin: 0;
+}
+
 .EventShow .card-collection,
 .ArtistShow .card-collection {
+  margin-top: 15px;
   overflow-y: scroll;
 }
 
@@ -166,5 +210,5 @@ COLORS
 }
 
 .ArtistShow .card-collection {
-  height: 58vh;
+  height: 67vh;
 }

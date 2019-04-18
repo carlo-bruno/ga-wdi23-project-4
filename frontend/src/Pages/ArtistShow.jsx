@@ -1,7 +1,10 @@
 import React from 'react';
 import moment from 'moment';
-import MiniCard from '../Components/MiniCard';
 import { Redirect } from 'react-router-dom';
+
+import MiniCard from '../Components/MiniCard';
+import { ReactComponent as Back } from '../images/chevron-left-solid.svg';
+import { ReactComponent as BookmarkS } from '../images/bookmark-solid.svg';
 
 const ArtistShow = (props) => {
   let content = <Redirect to='/artists' />;
@@ -59,15 +62,24 @@ const ArtistShow = (props) => {
   return (
     <div className='ArtistShow'>
       <header>
-        <span onClick={() => props.history.goBack()}>&larr;</span>
+        <span
+          onClick={() => props.history.goBack()}
+          className='back-btn'>
+          <Back />
+        </span>
         <button
           onClick={() =>
             props.watchArtist(
               showArtist.artistId,
               showArtist.artistName
             )
+          }
+          style={
+            !props.userId
+              ? { pointerEvents: 'none', color: '#ccc' }
+              : { color: '#5f3193' }
           }>
-          SAVE
+          <BookmarkS />
         </button>
       </header>
       {content}

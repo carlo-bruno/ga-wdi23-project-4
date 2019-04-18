@@ -1,7 +1,11 @@
 import React from 'react';
 import moment from 'moment';
-import MiniCard from '../Components/MiniCard';
 import { Redirect } from 'react-router-dom';
+
+import MiniCard from '../Components/MiniCard';
+
+import { ReactComponent as Back } from '../images/chevron-left-solid.svg';
+import { ReactComponent as BookmarkS } from '../images/bookmark-solid.svg';
 
 const EventShow = (props) => {
   let content = <Redirect to='/events' />;
@@ -20,7 +24,9 @@ const EventShow = (props) => {
     let cards = performance.map((artist, i) => {
       return (
         <MiniCard key={i}>
-          <h3>{artist.artistName}</h3>
+          <div>
+            <h3>{artist.artistName}</h3>
+          </div>
         </MiniCard>
       );
     });
@@ -57,7 +63,14 @@ const EventShow = (props) => {
   return (
     <div className='EventShow'>
       <header>
-        <span onClick={() => props.history.goBack()}>&larr;</span>
+        <span
+          onClick={() => props.history.goBack()}
+          className='back-btn'>
+          <Back />
+        </span>
+        <button style={{ pointerEvents: 'none', color: '#ccc' }}>
+          <BookmarkS />
+        </button>
       </header>
       {content}
     </div>

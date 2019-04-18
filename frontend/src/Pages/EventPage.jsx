@@ -55,11 +55,9 @@ class EventPage extends Component {
             className={`filter ${
               this.state.filter === 'saved' ? 'active' : ''
             }`}
-            onClick={() => this.changeFilter('saved')}>
-            SAVED{' '}
-            <span className='events-count'>
-              {/* {this.props.saved.length} */}
-            </span>
+            onClick={() => this.changeFilter('saved')}
+            style={{ pointerEvents: 'none', color: '#cccc' }}>
+            SAVED <span className='events-count'>0</span>
           </div>
         </div>
 

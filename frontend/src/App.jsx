@@ -282,6 +282,7 @@ class App extends Component {
                 path='/artists'
                 render={() => (
                   <ArtistPage
+                    userId={this.state.userId}
                     artists={this.state.artists}
                     saved={this.state.savedArtist}
                     handleQueryArtist={this.handleQueryArtist}
@@ -292,6 +293,7 @@ class App extends Component {
                 path='/artists/:artistId'
                 render={(props) => (
                   <ArtistShow
+                    userId={this.state.userId}
                     artists={this.state.artists}
                     saved={this.state.savedArtist}
                     watchArtist={this.watchArtist}

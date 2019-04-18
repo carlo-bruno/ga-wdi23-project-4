@@ -57,7 +57,12 @@ class ArtistPage extends Component {
             className={`filter ${
               this.state.filter === 'saved' ? 'active' : ''
             }`}
-            onClick={() => this.changeFilter('saved')}>
+            onClick={() => this.changeFilter('saved')}
+            style={
+              !this.props.userId
+                ? { pointerEvents: 'none', color: '#cccc' }
+                : {}
+            }>
             SAVED{' '}
             <span className='artists-count'>
               {this.props.saved.length}

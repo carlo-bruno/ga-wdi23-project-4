@@ -201,8 +201,6 @@ COLORS
   border-radius: 8px;
   padding: 10px 0;
 }
-.MiniCard div {
-}
 
 .MiniCard > * > * {
   margin: 0;
