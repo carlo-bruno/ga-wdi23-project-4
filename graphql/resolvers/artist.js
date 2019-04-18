@@ -17,12 +17,12 @@ const getArtists = (event) => {
 };
 
 const getEvents = (artist) => {
+  console.log('heeey', artist);
   return axios
     .get(
       `https://api.songkick.com/api/3.0/artists/${
         artist.id
-      }/calendar.json?apikey=${process.env.SONGKICK_API}
-  `
+      }/calendar.json?apikey=${process.env.SONGKICK_API}`
     )
     .then((data) => {
       return data.data.resultsPage.results.event;
@@ -109,14 +109,13 @@ module.exports = {
                   onTourUntil: saveArtist.onTourUntil,
                   events: getEvents.bind(this, saveArtist),
                 });
+                artistToWatch.save();
               }
-              artistToWatch.save();
               if (user.watchlist.includes(artistToWatch.id)) {
                 console.log('already Watching');
               }
               user.watchlist.push(artistToWatch);
               user.save();
-              console.log(artistToWatch);
               return artistToWatch;
             }
           );
