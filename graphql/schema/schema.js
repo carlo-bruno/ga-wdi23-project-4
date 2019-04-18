@@ -9,6 +9,7 @@ type Event {
   type: String
   date: String
   venue: String
+  metroArea: String
   lat: Float
   lng: Float
   performance: [Artist]

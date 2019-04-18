@@ -36,6 +36,7 @@ const getEvents = (artist) => {
             type: event.type,
             date: event.start.datetime || event.start.date,
             venue: event.venue.displayName,
+            metroArea: event.venue.metroArea.displayName,
             lat: event.location.lat,
             lng: event.location.lng,
             performance: getArtists.bind(this, event),
