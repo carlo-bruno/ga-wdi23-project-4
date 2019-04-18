@@ -166,7 +166,7 @@ COLORS
 /* Artist Card --------------------------------------- */
 .ArtistCard {
   border-radius: 6px;
-  background-image: linear-gradient(155deg, #131fa4, #913d88 60%);
+  background-image: linear-gradient(155deg, #131fa4, #913d88 50%);
   padding: 5px;
   margin-bottom: 0.8rem;
 }
@@ -187,4 +187,23 @@ COLORS
   padding: 0 10px;
 
   min-height: 90px;
+}
+/* Artist Card --------------------------------------- */
+.MiniCard {
+  background-image: linear-gradient(155deg, #131fa4, #913d88 80%);
+  min-height: 40px;
+  color: #ffffff;
+  width: 75%;
+  margin: 0 auto 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+  padding: 10px 0;
+}
+.MiniCard div {
+}
+
+.MiniCard > * > * {
+  margin: 0;
 }

@@ -1,21 +1,63 @@
-import React, { Component } from 'react';
+import React from 'react';
+import moment from 'moment';
+import MiniCard from '../Components/MiniCard';
+import { Redirect } from 'react-router-dom';
 
-class ArtistShow extends Component {
-  render() {
-    console.log(this.props.match.params);
+const ArtistShow = (props) => {
+  let content = <Redirect to='/artists' />;
+  let showArtist = null;
+  if (props.artists.length) {
+    showArtist = props.artists.find((artist) => {
+      return (
+        artist.artistId === parseInt(props.match.params.artistId)
+      );
+    });
 
-    // query backend for event
-    return (
-      <div className='ArtistShow'>
-        <header>
-          <span onClick={() => this.props.history.goBack()}>
-            &larr;
-          </span>
-        </header>
-        <h2>HEEEEEYYYYoooo ARTIST</h2>
-      </div>
+    let { artistName, onTourUntil, events } = showArtist;
+
+    let tourEnd = moment(onTourUntil).format('MMMM Do YYYY');
+
+    let cards = events.map((event, i) => {
+      let day = moment(event.date).format('MMM D, YYYY');
+      return (
+        <MiniCard key={i}>
+          <div className='artist'>
+            <h3>{event.eventName}</h3>
+            <h4>
+              {event.metroArea} &ndash; {day}
+            </h4>
+          </div>
+        </MiniCard>
+      );
+    });
+
+    content = (
+      <section>
+        <div className='title-box'>
+          <h2>{artistName}</h2>
+          {onTourUntil ? (
+            <h4>On Tour Until: {tourEnd} </h4>
+          ) : (
+            <h4>Currently not on tour.</h4>
+          )}
+        </div>
+
+        <div className='events-box'>
+          <h3>Upcoming events:</h3>
+          <div className='card-collection'>{cards}</div>
+        </div>
+      </section>
     );
   }
-}
+
+  return (
+    <div className='ArtistShow'>
+      <header>
+        <span onClick={() => props.history.goBack()}>&larr;</span>
+      </header>
+      {content}
+    </div>
+  );
+};
 
 export default ArtistShow;

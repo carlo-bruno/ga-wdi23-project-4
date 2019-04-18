@@ -29,6 +29,7 @@ COLORS
 .Content {
   display: block;
   height: 82vh;
+  overflow-y: hidden;
 }
 
 /* Typography ------------------------------------- */

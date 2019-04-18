@@ -155,3 +155,16 @@ COLORS
   height: 84%;
   overflow-y: scroll;
 }
+
+.EventShow .card-collection,
+.ArtistShow .card-collection {
+  overflow-y: scroll;
+}
+
+.EventShow .card-collection {
+  height: 36vh;
+}
+
+.ArtistShow .card-collection {
+  height: 58vh;
+}

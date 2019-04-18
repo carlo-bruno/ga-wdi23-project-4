@@ -38,6 +38,9 @@ class App extends Component {
   };
 
   handleQueryMetro = (query) => {
+    if (!query) {
+      return;
+    }
     let requestBody = {
       query: `
         query MetroEvents($metro: String) {
@@ -77,11 +80,17 @@ class App extends Component {
         return res.json();
       })
       .then((resData) => {
-        this.setState({ events: resData.data.metroEvents });
+        if (resData.data.metroEvents) {
+          this.setState({ events: resData.data.metroEvents });
+        }
+        return;
       });
   };
 
   handleQueryArtist = (query) => {
+    if (!query) {
+      return;
+    }
     let requestBody = {
       query: `
         query SearchArtist($search: String) {
@@ -89,6 +98,16 @@ class App extends Component {
             artistId
             artistName
             onTourUntil
+            events {
+              eventId
+              eventName
+              type
+              date
+              venue
+              metroArea
+              lat
+              lng
+            }
           }
         }
       `,
@@ -111,7 +130,10 @@ class App extends Component {
         return res.json();
       })
       .then((resData) => {
-        this.setState({ artists: resData.data.searchArtist });
+        if (resData.data.searchArtist) {
+          this.setState({ artists: resData.data.searchArtist });
+        }
+        return;
       });
   };
 
@@ -147,7 +169,9 @@ class App extends Component {
               />
               <Route
                 path={'/events/:eventId'}
-                render={(props) => <EventShow {...props} />}
+                render={(props) => (
+                  <EventShow events={this.state.events} {...props} />
+                )}
               />
 
               <Route
@@ -162,12 +186,17 @@ class App extends Component {
               />
               <Route
                 path='/artists/:artistId'
-                render={(props) => <ArtistShow {...props} />}
+                render={(props) => (
+                  <ArtistShow
+                    artists={this.state.artists}
+                    {...props}
+                  />
+                )}
               />
-              {/* {this.state.token && ( */}
-              <Route path='/profile' component={ProfilePage} />
-              {/* )} */}
-              {/* {!this.state.token && <Redirect to='/' exact />} */}
+              {this.state.token && (
+                <Route path='/profile' component={ProfilePage} />
+              )}
+              {!this.state.token && <Redirect to='/' exact />}
             </Switch>
           </main>
 
