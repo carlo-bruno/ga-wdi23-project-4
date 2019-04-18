@@ -7,7 +7,6 @@ const getArtists = (event) => {
   const artistsArr = event.performance.map((artist) => {
     return { artistId: artist.id, artistName: artist.displayName };
   });
-  // console.log(artistsArr);
   return artistsArr;
 };
 
@@ -23,7 +22,6 @@ module.exports = {
         return data.data.resultsPage.results.location[0].metroArea.id;
       })
       .then((metroId) => {
-        // console.log(metroId);
         return axios
           .get(
             `https://api.songkick.com/api/3.0/metro_areas/${metroId}/calendar.json?apikey=${
@@ -35,9 +33,10 @@ module.exports = {
           })
           .then((events) => {
             let eventsArr = events.map((event) => {
+              let idx = event.displayName.indexOf(' at ');
               return {
                 eventId: event.id,
-                eventName: event.displayName,
+                eventName: event.displayName.slice(0, idx),
                 type: event.type,
                 date: event.start.datetime || event.start.date,
                 venue: event.venue.displayName,

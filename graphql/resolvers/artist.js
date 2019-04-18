@@ -13,12 +13,10 @@ const getArtists = (event) => {
   const artistsArr = event.performance.map((artist) => {
     return { artistId: artist.id, artistName: artist.displayName };
   });
-  // console.log(artistsArr);
   return artistsArr;
 };
 
 const getEvents = (artist) => {
-  // https://api.songkick.com/api/3.0/artists/{artist_id}/calendar.json?apikey={your_api_key}
   return axios
     .get(
       `https://api.songkick.com/api/3.0/artists/${
@@ -27,23 +25,25 @@ const getEvents = (artist) => {
   `
     )
     .then((data) => {
-      // console.log('EYYYY', data.data.resultsPage.results.event);
       return data.data.resultsPage.results.event;
     })
     .then((events) => {
-      let eventsArr = events.map((event) => {
-        return {
-          eventId: event.id,
-          eventName: event.displayName,
-          type: event.type,
-          date: event.start.datetime || event.start.date,
-          venue: event.venue.displayName,
-          lat: event.location.lat,
-          lng: event.location.lng,
-          performance: getArtists.bind(this, event),
-        };
-      });
-      return eventsArr;
+      if (events) {
+        let eventsArr = events.map((event) => {
+          return {
+            eventId: event.id,
+            eventName: event.displayName,
+            type: event.type,
+            date: event.start.datetime || event.start.date,
+            venue: event.venue.displayName,
+            lat: event.location.lat,
+            lng: event.location.lng,
+            performance: getArtists.bind(this, event),
+          };
+        });
+        return eventsArr;
+      }
+      return [];
     });
 };
 
