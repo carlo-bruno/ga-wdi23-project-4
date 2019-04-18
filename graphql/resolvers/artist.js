@@ -30,9 +30,10 @@ const getEvents = (artist) => {
     .then((events) => {
       if (events) {
         let eventsArr = events.map((event) => {
+          let idx = event.displayName.indexOf(' at ');
           return {
             eventId: event.id,
-            eventName: event.displayName,
+            eventName: event.displayName.slice(0, idx),
             type: event.type,
             date: event.start.datetime || event.start.date,
             venue: event.venue.displayName,
