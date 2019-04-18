@@ -34,6 +34,7 @@ class EventPage extends Component {
               _id
               artistId
               artistName
+              onTourUntil
             }
           }
         }
@@ -74,9 +75,9 @@ class EventPage extends Component {
             name='queryMetro'
             id='queryMetro'
             ref={this.queryMetro}
-            placeholder='Metro Area'
+            placeholder='Search for Metro Area'
           />
-          <button onClick={this.handleQueryMetro}>Search</button>
+          <button onClick={this.handleQueryMetro}>Metro Area</button>
         </header>
 
         <div className='events-filters'>

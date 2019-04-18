@@ -19,6 +19,7 @@ type Event {
     artistId: Int
     artistName: String
     onTourUntil: String
+    events: [Event]
   }
 
   type User {

@@ -34,7 +34,7 @@ module.exports = {
             return data.data.resultsPage.results.event;
           })
           .then((events) => {
-            let arr = events.map((event) => {
+            let eventsArr = events.map((event) => {
               return {
                 eventId: event.id,
                 eventName: event.displayName,
@@ -46,7 +46,7 @@ module.exports = {
                 performance: getArtists.bind(this, event),
               };
             });
-            return arr;
+            return eventsArr;
           });
       });
   },

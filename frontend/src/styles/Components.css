@@ -2,7 +2,8 @@
 COLORS
 #131fa4
 #913d88
-#481ee1;
+#481ee1
+#5f3193
 */
 
 /* Header ----------------------------------------- */
@@ -100,8 +101,8 @@ COLORS
 
 .Auth .switch-btn {
   margin-top: 15px;
-  border: 2px solid #131fa4;
-  color: #481ee1;
+  border: 2px solid #5f3193;
+  color: #5f3193;
   padding: 10px 0;
 }
 

@@ -66,7 +66,7 @@ class ArtistPage extends Component {
             ref={this.queryArtist}
             placeholder='Search for Artist'
           />
-          <button onClick={this.handleQueryArtist}>Search</button>
+          <button onClick={this.handleQueryArtist}>Artist</button>
         </header>
 
         <div className='artists-filters'>
