@@ -20,6 +20,8 @@ class App extends Component {
     this.state = {
       token: null,
       userId: null,
+      events: [],
+      artists: [],
     };
   }
 
@@ -35,6 +37,85 @@ class App extends Component {
     });
   };
 
+  handleQueryMetro = (query) => {
+    let requestBody = {
+      query: `
+        query MetroEvents($metro: String) {
+          metroEvents(metro: $metro) {
+            eventId
+            eventName
+            type
+            date
+            venue
+            lat
+            lng
+            performance {
+              _id
+              artistId
+              artistName
+              onTourUntil
+            }
+          }
+        }
+      `,
+      variables: {
+        metro: query,
+      },
+    };
+
+    fetch('/graphql', {
+      method: 'POST',
+      body: JSON.stringify(requestBody),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((res) => {
+        if (res.status !== 200 && res.status !== 201) {
+          throw new Error('Failed!');
+        }
+        return res.json();
+      })
+      .then((resData) => {
+        this.setState({ events: resData.data.metroEvents });
+      });
+  };
+
+  handleQueryArtist = (query) => {
+    let requestBody = {
+      query: `
+        query SearchArtist($search: String) {
+          searchArtist(search: $search) {
+            artistId
+            artistName
+            onTourUntil
+          }
+        }
+      `,
+      variables: {
+        search: query,
+      },
+    };
+
+    fetch('/graphql', {
+      method: 'POST',
+      body: JSON.stringify(requestBody),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((res) => {
+        if (res.status !== 200 && res.status !== 201) {
+          throw new Error('Failed!');
+        }
+        return res.json();
+      })
+      .then((resData) => {
+        this.setState({ artists: resData.data.searchArtist });
+      });
+  };
+
+  //!-------------------------------------------------------------------!//
   render() {
     return (
       <div className='App'>
@@ -53,12 +134,32 @@ class App extends Component {
                 <Redirect from='/' to='/events' exact />
               )}
               <Route exact path='/' component={LandingPage} />
-              <Route exact path='/events' component={EventsPage} />
+
+              <Route
+                exact
+                path='/events'
+                render={() => (
+                  <EventsPage
+                    events={this.state.events}
+                    handleQueryMetro={this.handleQueryMetro}
+                  />
+                )}
+              />
               <Route
                 path={'/events/:eventId'}
                 render={(props) => <EventShow {...props} />}
               />
-              <Route exact path='/artists' component={ArtistPage} />
+
+              <Route
+                exact
+                path='/artists'
+                render={() => (
+                  <ArtistPage
+                    artists={this.state.artists}
+                    handleQueryArtist={this.handleQueryArtist}
+                  />
+                )}
+              />
               <Route
                 path='/artists/:artistId'
                 render={(props) => <ArtistShow {...props} />}

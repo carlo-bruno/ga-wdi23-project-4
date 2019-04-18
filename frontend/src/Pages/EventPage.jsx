@@ -8,7 +8,6 @@ class EventPage extends Component {
 
     this.state = {
       filter: 'all',
-      events: [],
     };
   }
 
@@ -16,54 +15,8 @@ class EventPage extends Component {
     this.setState({ filter });
   };
 
-  handleQueryMetro = () => {
-    const metro = this.queryMetro.current.value;
-
-    let requestBody = {
-      query: `
-        query MetroEvents($metro: String) {
-          metroEvents(metro: $metro) {
-            eventId
-            eventName
-            type
-            date
-            venue
-            lat
-            lng
-            performance {
-              _id
-              artistId
-              artistName
-              onTourUntil
-            }
-          }
-        }
-      `,
-      variables: {
-        metro: metro,
-      },
-    };
-
-    fetch('/graphql', {
-      method: 'POST',
-      body: JSON.stringify(requestBody),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-      .then((res) => {
-        if (res.status !== 200 && res.status !== 201) {
-          throw new Error('Failed!');
-        }
-        return res.json();
-      })
-      .then((resData) => {
-        this.setState({ events: resData.data.metroEvents });
-      });
-  };
-
   render() {
-    let cards = this.state.events.map((event, i) => {
+    let cards = this.props.events.map((event, i) => {
       return <EventCard key={i} event={event} />;
     });
 
@@ -77,7 +30,14 @@ class EventPage extends Component {
             ref={this.queryMetro}
             placeholder='Search for Metro Area'
           />
-          <button onClick={this.handleQueryMetro}>Metro Area</button>
+          <button
+            onClick={() =>
+              this.props.handleQueryMetro(
+                this.queryMetro.current.value
+              )
+            }>
+            Metro Area
+          </button>
         </header>
 
         <div className='events-filters'>
@@ -88,7 +48,7 @@ class EventPage extends Component {
             onClick={() => this.changeFilter('all')}>
             ALL{' '}
             <span className='events-count'>
-              {this.state.events.length}
+              {this.props.events.length}
             </span>{' '}
           </div>
           <div
@@ -98,7 +58,7 @@ class EventPage extends Component {
             onClick={() => this.changeFilter('saved')}>
             SAVED{' '}
             <span className='events-count'>
-              {/* {this.state.saved.length} */}
+              {/* {this.props.saved.length} */}
             </span>
           </div>
         </div>

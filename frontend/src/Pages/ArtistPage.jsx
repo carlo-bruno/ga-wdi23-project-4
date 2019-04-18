@@ -7,7 +7,6 @@ class ArtistPage extends Component {
     this.queryArtist = React.createRef();
     this.state = {
       filter: 'all',
-      artists: [],
     };
   }
 
@@ -15,45 +14,8 @@ class ArtistPage extends Component {
     this.setState({ filter });
   };
 
-  handleQueryArtist = () => {
-    const search = this.queryArtist.current.value;
-
-    let requestBody = {
-      query: `
-        query SearchArtist($search: String) {
-          searchArtist(search: $search) {
-            artistId
-            artistName
-            onTourUntil
-          }
-        }
-      
-      `,
-      variables: {
-        search: search,
-      },
-    };
-
-    fetch('/graphql', {
-      method: 'POST',
-      body: JSON.stringify(requestBody),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-      .then((res) => {
-        if (res.status !== 200 && res.status !== 201) {
-          throw new Error('Failed!');
-        }
-        return res.json();
-      })
-      .then((resData) => {
-        this.setState({ artists: resData.data.searchArtist });
-      });
-  };
-
   render() {
-    let cards = this.state.artists.map((artist, i) => {
+    let cards = this.props.artists.map((artist, i) => {
       return <ArtistCard key={i} artist={artist} />;
     });
     return (
@@ -66,7 +28,14 @@ class ArtistPage extends Component {
             ref={this.queryArtist}
             placeholder='Search for Artist'
           />
-          <button onClick={this.handleQueryArtist}>Artist</button>
+          <button
+            onClick={() =>
+              this.props.handleQueryArtist(
+                this.queryArtist.current.value
+              )
+            }>
+            Artist
+          </button>
         </header>
 
         <div className='artists-filters'>
@@ -77,7 +46,7 @@ class ArtistPage extends Component {
             onClick={() => this.changeFilter('all')}>
             ALL{' '}
             <span className='artists-count'>
-              {this.state.artists.length}
+              {this.props.artists.length}
             </span>{' '}
           </div>
           <div
