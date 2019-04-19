@@ -30,7 +30,7 @@ app.use(isAuth);
 
 // Mongoose
 mongoose.connect(process.env.MONGODB_URI, {
-  useNewUrlParser: true
+  useNewUrlParser: true,
 });
 
 const db = mongoose.connection;
@@ -42,17 +42,16 @@ db.on('error', (err) => {
   console.log(`Database error: ${err}`);
 });
 
-//
-app.get('/', (req, res) => {
-  res.send('Working 🔥');
-});
+// app.get('/', (req, res) => {
+//   res.send('Working 🔥');
+// });
 
 app.use(
   '/graphql',
   graphqlHTTP({
     schema: graphQLSchema,
     rootValue: graphQLResolvers,
-    graphiql: true
+    graphiql: false, //
   })
 );
 

@@ -34,7 +34,6 @@ class App extends Component {
   };
 
   logout = () => {
-    console.log('trying to log out');
     this.setState({
       token: null,
       userId: null,

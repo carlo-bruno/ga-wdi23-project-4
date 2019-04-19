@@ -2,8 +2,8 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
-import { ReactComponent as Calendar } from '../images/calendar-regular.svg';
-import { ReactComponent as Star } from '../images/star-regular.svg';
+import { ReactComponent as Calendar } from '../images/calendar-solid.svg';
+import { ReactComponent as Star } from '../images/star-solid.svg';
 import { ReactComponent as User } from '../images/user-alt-solid.svg';
 
 import AuthContext from '../context/auth-context';

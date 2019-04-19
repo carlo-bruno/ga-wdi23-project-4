@@ -61,5 +61,4 @@ type Event {
     query: RootQuery
     mutation: RootMutation
   }
-
 `);

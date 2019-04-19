@@ -61,7 +61,6 @@ module.exports = {
       })
       .then((artists) => {
         let arr = artists.map((artist) => {
-          // console.log(artist);
           return {
             artistId: artist.id,
             artistName: artist.displayName,
@@ -73,11 +72,9 @@ module.exports = {
       });
   },
   watchArtist: (args, req) => {
-    //! use req.userId when ready to use auth
-    // if (!req.isAuth) {
-    //   throw new Error('Unauthenticated!');
-    // }
-    // get artist data from db
+    if (!req.isAuth) {
+      throw new Error('Unauthenticated!');
+    }
     let saveId = req.body.variables.artistId;
     return axios
       .get(
@@ -110,9 +107,6 @@ module.exports = {
                 });
                 artistToWatch.save();
               }
-              if (user.watchlist.includes(artistToWatch.id)) {
-                console.log('already Watching');
-              }
               user.watchlist.push(artistToWatch);
               user.save();
               return true;
@@ -125,13 +119,10 @@ module.exports = {
     if (!req.isAuth) {
       throw new Error('Unauthenticated!');
     }
-    console.log('hello');
     User.findById(req.userId)
       .populate('watchlist')
       .exec((err, user) => {
-        console.log('before', user);
         user.watchlist.pull(args.id);
-        console.log('after', user);
         user.save();
       });
     return true;

@@ -23,10 +23,9 @@ module.exports = {
         password: hashedPassword,
       });
 
-      const result = await user.save();
-      console.log(result);
+      await user.save();
 
-      const token = jwt.sign(
+      const token = await jwt.sign(
         { userId: user.id, email: user.email },
         process.env.SECRET,
         {

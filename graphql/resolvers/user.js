@@ -54,8 +54,6 @@ const getWatchlist = (watchlistIds) => {
   });
 };
 
-// to test, find all users
-// to test, find one user, remove password on query
 module.exports = {
   user: ({ userId }) =>
     User.findOne({ id: userId }).then((user) => {
