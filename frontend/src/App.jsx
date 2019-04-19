@@ -52,6 +52,7 @@ class App extends Component {
             type
             date
             venue
+            metroArea
             lat
             lng
             performance {

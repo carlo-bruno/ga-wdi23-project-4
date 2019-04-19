@@ -4,19 +4,23 @@ import { Redirect } from 'react-router-dom';
 
 import MiniCard from '../Components/MiniCard';
 import { ReactComponent as Back } from '../images/chevron-left-solid.svg';
-import { ReactComponent as BookmarkS } from '../images/bookmark-solid.svg';
+import { ReactComponent as Heart } from '../images/heart-solid.svg';
+import { ReactComponent as HeartBreak } from '../images/heart-broken-solid.svg';
 
 const ArtistShow = (props) => {
   let content = <Redirect to='/artists' />;
+  let isSaved = false;
   let showArtist = null;
   if (props.artists.length || props.saved.length) {
     showArtist =
-      props.artists.find((artist) => {
+      props.saved.find((artist) => {
+        isSaved = true;
         return (
           artist.artistId === parseInt(props.match.params.artistId)
         );
       }) ||
-      props.saved.find((artist) => {
+      props.artists.find((artist) => {
+        isSaved = false;
         return (
           artist.artistId === parseInt(props.match.params.artistId)
         );
@@ -58,6 +62,7 @@ const ArtistShow = (props) => {
       </section>
     );
   }
+  console.log('isSaved', isSaved);
 
   return (
     <div className='ArtistShow'>
@@ -79,7 +84,7 @@ const ArtistShow = (props) => {
               ? { pointerEvents: 'none', color: '#ccc' }
               : { color: '#5f3193' }
           }>
-          <BookmarkS />
+          {isSaved ? <HeartBreak /> : <Heart />}
         </button>
       </header>
       {content}

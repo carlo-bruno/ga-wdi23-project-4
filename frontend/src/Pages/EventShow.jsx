@@ -5,7 +5,7 @@ import { Redirect } from 'react-router-dom';
 import MiniCard from '../Components/MiniCard';
 
 import { ReactComponent as Back } from '../images/chevron-left-solid.svg';
-import { ReactComponent as BookmarkS } from '../images/bookmark-solid.svg';
+import { ReactComponent as Heart } from '../images/heart-solid.svg';
 
 const EventShow = (props) => {
   let content = <Redirect to='/events' />;
@@ -15,7 +15,7 @@ const EventShow = (props) => {
       return event.eventId === parseInt(props.match.params.eventId);
     });
 
-    let { eventName, type, date, venue, performance } = showEvent;
+    let { eventName, type, date, venue,metroArea, performance } = showEvent;
 
     let day = moment(date).format('dddd, MMMM D, YYYY');
     let fromNow = moment(date).fromNow();
@@ -48,6 +48,7 @@ const EventShow = (props) => {
         <div className='location-box'>
           <div>
             <p>{venue}</p>
+            <p>{metroArea}</p>
             <p>{type}</p>
           </div>
         </div>
@@ -69,7 +70,7 @@ const EventShow = (props) => {
           <Back />
         </span>
         <button style={{ pointerEvents: 'none', color: '#ccc' }}>
-          <BookmarkS />
+          <Heart/>
         </button>
       </header>
       {content}
