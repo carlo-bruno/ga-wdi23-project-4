@@ -57,7 +57,7 @@ app.use(
 );
 
 app.get('*', function(req, res) {
-  res.sendFile(__dirname + '/client/build/index.html');
+  res.sendFile(__dirname + '/frontend/build/index.html');
 });
 
 app.listen(port, () => {
