@@ -141,31 +141,49 @@ class App extends Component {
 
   watchArtist = (artistId, artistName) => {
     if (!this.state.token) return;
-
     let requestBody = {
       query: `
       mutation WatchArtist($artistId: Int, $artistName: String){
-        watchArtist(artistId: $artistId, artistName: $artistName) {
-          _id
-          artistId
-          artistName
-          onTourUntil
-          events {
-            eventId
-            eventName
-            type
-            date
-            venue
-            metroArea
-            lat
-            lng
-          }
-        }
+        watchArtist(artistId: $artistId, artistName: $artistName)
       }
       `,
       variables: {
-        search: parseInt(artistId),
+        artistId: parseInt(artistId),
         artistName: artistName,
+      },
+    };
+
+    let token = this.state.token;
+    fetch('/graphql', {
+      method: 'POST',
+      body: JSON.stringify(requestBody),
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + token,
+      },
+    })
+      .then((res) => {
+        // if (res.status !== 200 && res.status !== 201) {
+        //   throw new Error('Failed!');
+        // }
+        return res.json();
+      })
+      .then((resData) => {
+        this.getSavedArtist();
+      });
+  };
+
+  unwatchArtist = (id) => {
+    if (!this.state.token) return;
+    console.log('hello', id);
+    let requestBody = {
+      query: ` 
+      mutation UnwatchArtist($id : ID){
+        unwatchArtist(id: $id)
+      }
+      `,
+      variables: {
+        id: id,
       },
     };
 
@@ -298,6 +316,7 @@ class App extends Component {
                     artists={this.state.artists}
                     saved={this.state.savedArtist}
                     watchArtist={this.watchArtist}
+                    unwatchArtist={this.unwatchArtist}
                     {...props}
                   />
                 )}

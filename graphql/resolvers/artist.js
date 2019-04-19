@@ -74,11 +74,11 @@ module.exports = {
   },
   watchArtist: (args, req) => {
     //! use req.userId when ready to use auth
-    if (!req.isAuth) {
-      throw new Error('Unauthenticated!');
-    }
+    // if (!req.isAuth) {
+    //   throw new Error('Unauthenticated!');
+    // }
     // get artist data from db
-    let saveId = req.body.variables.search;
+    let saveId = req.body.variables.artistId;
     return axios
       .get(
         `https://api.songkick.com/api/3.0/search/artists.json?apikey=${
@@ -115,7 +115,7 @@ module.exports = {
               }
               user.watchlist.push(artistToWatch);
               user.save();
-              return artistToWatch;
+              return true;
             }
           );
         });
@@ -125,6 +125,7 @@ module.exports = {
     if (!req.isAuth) {
       throw new Error('Unauthenticated!');
     }
+    console.log('hello');
     User.findById(req.userId)
       .populate('watchlist')
       .exec((err, user) => {
@@ -133,5 +134,6 @@ module.exports = {
         console.log('after', user);
         user.save();
       });
+    return true;
   },
 };

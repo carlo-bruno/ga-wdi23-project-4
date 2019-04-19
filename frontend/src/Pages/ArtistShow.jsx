@@ -63,6 +63,42 @@ const ArtistShow = (props) => {
     );
   }
   console.log('isSaved', isSaved);
+  console.log(showArtist);
+
+  let heart;
+  if (!isSaved) {
+    heart = (
+      <button
+        onClick={() =>
+          props.watchArtist(
+            showArtist.artistId,
+            showArtist.artistName
+          )
+        }
+        style={
+          !props.userId
+            ? { pointerEvents: 'none', color: '#ccc' }
+            : { color: '#5f3193' }
+        }>
+        <Heart />
+      </button>
+    );
+  } else {
+    heart = (
+      <button
+        onClick={() => {
+          props.unwatchArtist(showArtist._id);
+          props.history.goBack();
+        }}
+        style={
+          !props.userId
+            ? { pointerEvents: 'none', color: '#ccc' }
+            : { color: '#5f3193' }
+        }>
+        <HeartBreak />
+      </button>
+    );
+  }
 
   return (
     <div className='ArtistShow'>
@@ -72,20 +108,7 @@ const ArtistShow = (props) => {
           className='back-btn'>
           <Back />
         </span>
-        <button
-          onClick={() =>
-            props.watchArtist(
-              showArtist.artistId,
-              showArtist.artistName
-            )
-          }
-          style={
-            !props.userId
-              ? { pointerEvents: 'none', color: '#ccc' }
-              : { color: '#5f3193' }
-          }>
-          {isSaved ? <HeartBreak /> : <Heart />}
-        </button>
+        {heart}
       </header>
       {content}
     </div>
