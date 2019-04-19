@@ -188,7 +188,8 @@ COLORS
 
   min-height: 90px;
 }
-/* Artist Card --------------------------------------- */
+
+/* Mini Card --------------------------------------- */
 .MiniCard {
   background-image: linear-gradient(155deg, #131fa4, #913d88 80%);
   min-height: 40px;
@@ -204,4 +205,54 @@ COLORS
 
 .MiniCard > * > * {
   margin: 0;
+}
+
+/* Loading Icons --------------------------------------- */
+.LoadEvents,
+.LoadArtists {
+  height: 40vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+}
+
+.LoadEvents .inner {
+  height: 170px;
+  animation: tilting 1s infinite;
+  transform-origin: 40% 50%;
+}
+
+.LoadArtists .inner {
+  height: 220px;
+  animation: tilting 1s infinite;
+  transform-origin: 0% 100%;
+}
+
+.LoadEvents svg {
+  height: 170px;
+  width: 170px;
+}
+
+.LoadArtists svg {
+  height: 220px;
+  width: 220px;
+}
+
+.Loading svg,
+.Loading path {
+  z-index: 100;
+}
+
+@keyframes tilting {
+  0% {
+    transform: rotate(5deg);
+  }
+  50% {
+    transform: rotate(-5deg);
+  }
+  100% {
+    transform: rotate(5deg);
+  }
 }

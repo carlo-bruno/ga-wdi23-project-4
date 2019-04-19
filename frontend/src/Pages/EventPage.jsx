@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import EventCard from '../Components/EventCard';
+import LoadEvents from '../Components/LoadEvents';
 
 class EventPage extends Component {
   constructor(props) {
@@ -61,7 +62,10 @@ class EventPage extends Component {
           </div>
         </div>
 
-        <section className='events-collection'>{cards}</section>
+        <section className='events-collection'>
+          {!cards.length && <LoadEvents />}
+          {cards}
+        </section>
       </div>
     );
   }

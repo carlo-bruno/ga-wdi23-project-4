@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import ArtistCard from '../Components/ArtistCard';
+import LoadArtist from '../Components/LoadArtists';
 
 class ArtistPage extends Component {
   constructor(props) {
@@ -70,7 +71,10 @@ class ArtistPage extends Component {
           </div>
         </div>
 
-        <section className='artists-collection'>{cards}</section>
+        <section className='artists-collection'>
+          {!cards.length && <LoadArtist />}
+          {cards}
+        </section>
       </div>
     );
   }

@@ -62,8 +62,6 @@ const ArtistShow = (props) => {
       </section>
     );
   }
-  console.log('isSaved', isSaved);
-  console.log(showArtist);
 
   let heart;
   if (!isSaved) {

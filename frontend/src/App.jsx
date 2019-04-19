@@ -175,7 +175,6 @@ class App extends Component {
 
   unwatchArtist = (id) => {
     if (!this.state.token) return;
-    console.log('hello', id);
     let requestBody = {
       query: ` 
       mutation UnwatchArtist($id : ID){
