@@ -14,7 +14,7 @@ class ProfilePage extends Component {
                   alt='placeholder'
                 />
               </div>
-              <h3>{context.userId}</h3>
+              <h3>Hi, {context.username}</h3>
             </section>
             <button className='logout-btn' onClick={context.logout}>
               Logout

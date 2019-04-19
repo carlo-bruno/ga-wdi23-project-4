@@ -50,14 +50,20 @@ COLORS
 /* TODO nav active (maybe a round white border) */
 
 /* Auth Form --------------------------------------- */
+.Auth {
+  height: 37vh;
+  padding: 10px 0;
+}
+
 .Auth .auth-form {
   display: flex;
   flex-direction: column;
-  padding: 10px;
+  padding: 5px 10px;
+  height: 93%;
 }
 
 .Auth h3 {
-  margin: 10px 0;
+  margin: 0 0 5px;
 }
 
 .Auth .form-control input {
@@ -76,7 +82,7 @@ COLORS
   flex-direction: column;
   /* justify-content: space-between; */
   width: 80%;
-  margin: 0 auto;
+  margin: auto auto 0;
 }
 .Auth .form-actions small {
   margin: 8px;

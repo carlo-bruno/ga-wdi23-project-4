@@ -20,14 +20,15 @@ class App extends Component {
     this.state = {
       token: null,
       userId: null,
+      username: null,
       events: [],
       artists: [],
       savedArtist: [],
     };
   }
 
-  login = (token, userId, tokenExpiration) => {
-    this.setState({ token, userId }, () => {
+  login = (token, userId, username, tokenExpiration) => {
+    this.setState({ token, userId, username }, () => {
       this.getSavedArtist();
     });
   };
@@ -37,6 +38,7 @@ class App extends Component {
     this.setState({
       token: null,
       userId: null,
+      savedArtist: [],
     });
   };
 
@@ -266,6 +268,7 @@ class App extends Component {
           value={{
             token: this.state.token,
             userId: this.state.userId,
+            username: this.state.username,
             login: this.login,
             logout: this.logout,
           }}>

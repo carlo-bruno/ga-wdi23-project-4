@@ -7,7 +7,7 @@ module.exports = {
   createUser: async (args) => {
     try {
       const existingUser = await User.findOne({
-        email: args.userInput.email
+        email: args.userInput.email,
       });
       if (existingUser) {
         throw new Error('User exists already.');
@@ -18,13 +18,27 @@ module.exports = {
       );
 
       const user = new User({
+        username: args.userInput.username,
         email: args.userInput.email,
-        password: hashedPassword
+        password: hashedPassword,
       });
 
       const result = await user.save();
+      console.log(result);
 
-      return { ...result._doc, password: null, _id: result.id };
+      const token = jwt.sign(
+        { userId: user.id, email: user.email },
+        process.env.SECRET,
+        {
+          expiresIn: '1h',
+        }
+      );
+      return {
+        userId: user.id,
+        username: user.username,
+        token: token,
+        tokenExpiration: 1,
+      };
     } catch (err) {
       throw err;
     }
@@ -42,9 +56,14 @@ module.exports = {
       { userId: user.id, email: user.email },
       process.env.SECRET,
       {
-        expiresIn: '1h'
+        expiresIn: '1h',
       }
     );
-    return { userId: user.id, token: token, tokenExpiration: 1 };
-  }
+    return {
+      userId: user.id,
+      username: user.username,
+      token: token,
+      tokenExpiration: 1,
+    };
+  },
 };

@@ -5,11 +5,12 @@ import AuthContext from '../context/auth-context';
 class Auth extends Component {
   constructor(props) {
     super(props);
+    this.usernameEl = React.createRef();
     this.emailEl = React.createRef();
     this.passwordEl = React.createRef();
 
     this.state = {
-      isLogin: true
+      isLogin: true,
     };
   }
 
@@ -24,6 +25,7 @@ class Auth extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
+
     const email = this.emailEl.current.value;
     const password = this.passwordEl.current.value;
 
@@ -32,6 +34,7 @@ class Auth extends Component {
         query Login($email: String!, $password: String!) {
           login(email: $email, password: $password) {
             userId
+            username
             token
             tokenExpiration
           }
@@ -39,24 +42,28 @@ class Auth extends Component {
       `,
       variables: {
         email: email,
-        password: password
-      }
+        password: password,
+      },
     };
 
     if (!this.state.isLogin) {
+      const username = this.usernameEl.current.value;
       requestBody = {
         query: `
-          mutation CreateUser($email: String!, $password: String!) {
-            createUser(userInput: {email: $email, password: $password}) {
-              _id
-              email
+          mutation CreateUser($username: String!, $email: String!, $password: String!) {
+            createUser(userInput: {username: $username, email: $email, password: $password}) {
+              userId
+              username
+              token
+              tokenExpiration
             }
           }
         `,
         variables: {
+          username: username,
           email: email,
-          password: password
-        }
+          password: password,
+        },
       };
     }
 
@@ -64,8 +71,8 @@ class Auth extends Component {
       method: 'POST',
       body: JSON.stringify(requestBody),
       headers: {
-        'Content-Type': 'application/json'
-      }
+        'Content-Type': 'application/json',
+      },
     })
       .then((res) => {
         if (res.status !== 200 && res.status !== 201) {
@@ -74,11 +81,20 @@ class Auth extends Component {
         return res.json();
       })
       .then((resData) => {
-        if (resData.data.login.token) {
+        console.log(resData);
+        if (resData.data.login) {
           this.context.login(
             resData.data.login.token,
             resData.data.login.userId,
+            resData.data.login.username,
             resData.data.login.tokenExpiration
+          );
+        } else {
+          this.context.login(
+            resData.data.createUser.token,
+            resData.data.createUser.userId,
+            resData.data.createUser.username,
+            resData.data.createUser.tokenExpiration
           );
         }
       })
@@ -96,6 +112,17 @@ class Auth extends Component {
             : 'Sign up for a new account'}
         </h3>
         <form className='auth-form' onSubmit={this.handleSubmit}>
+          {!this.state.isLogin && (
+            <div className='form-control'>
+              <input
+                type='text'
+                id='username'
+                ref={this.usernameEl}
+                placeholder='Username'
+                required
+              />
+            </div>
+          )}
           <div className='form-control'>
             <input
               type='email'

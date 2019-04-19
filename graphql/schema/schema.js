@@ -26,17 +26,20 @@ type Event {
   type User {
     _id: ID!
     email: String!
+    username: String
     password: String
     watchlist: [Artist]
   }
 
   type AuthData {
     userId: ID!
+    username: String!
     token: String!
     tokenExpiration: Int!
   }
 
   input UserInput {
+    username: String!
     email: String!
     password: String!
   }
@@ -49,7 +52,7 @@ type Event {
   }
 
   type RootMutation {
-    createUser(userInput: UserInput): User
+    createUser(userInput: UserInput): AuthData
     watchArtist(artistId: Int, artistName: String): Boolean
     unwatchArtist(id: ID): Boolean
   }
