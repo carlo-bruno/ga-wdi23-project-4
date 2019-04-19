@@ -39,6 +39,13 @@ COLORS
   justify-content: space-evenly;
 }
 
+.MenuBar a {
+  background-color: transparent;
+  border-radius: 50%;
+  padding: 7px;
+  transition: ease-in 300ms;
+}
+
 .MenuBar svg {
   width: 32px;
   height: 32px;
@@ -48,6 +55,13 @@ COLORS
   fill: #ffffff;
 }
 /* TODO nav active (maybe a round white border) */
+
+.MenuBar a.active {
+  background-color: #ffffff;
+}
+.MenuBar a.active > svg path {
+  fill: #5f3193;
+}
 
 /* Auth Form --------------------------------------- */
 .Auth {
