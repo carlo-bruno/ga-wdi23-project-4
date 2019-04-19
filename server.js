@@ -12,7 +12,7 @@ const graphQLResolvers = require('./graphql/resolvers/index');
 // Middleware
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
-app.use(express.static(__dirname + '/client/build'));
+app.use(express.static(__dirname + '/frontend/build'));
 
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
