@@ -56,6 +56,10 @@ app.use(
   })
 );
 
+app.get('*', function(req, res) {
+  res.sendFile(__dirname + '/client/build/index.html');
+});
+
 app.listen(port, () => {
   console.log(`🔥 Listening on port ${port}...`);
 });
