@@ -43,9 +43,9 @@ This is Portfolio Project 4 of General Assembly Web Development Immersive. The g
 
 #### HighNote Screenshot
 
-<img src="./screen-shots/ss-highnote-landing.png" width="200">
-<img src="./screen-shots/ss-highnote-events.png" width="200">
-<img src="./screen-shots/ss-highnote-artist.png" width="200">
+<img src="./screen-shots/ss-highnote-landing.png" width="200" style="display: inline-block;">
+<img src="./screen-shots/ss-highnote-events.png" width="200" style="display: inline-block;">
+<img src="./screen-shots/ss-highnote-artist.png" width="200" style="display: inline-block;">
 
 ## Building the App
 
